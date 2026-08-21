@@ -1,0 +1,273 @@
+/* ===== RESET & BASE ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fafafa;
+    color: #222;
+}
+
+/* ===== LAYOUT UTAMA ===== */
+#app {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+#app > h2 {
+    grid-column: 1 / -1;
+    order: 1;
+    margin: 0 0 4px 0;
+    font-size: 20px;
+}
+
+#app > button {
+    grid-column: 1 / -1;
+    order: 0;
+    justify-self: start;
+}
+
+/* Tugas di kiri, Kutipan di kanan (sebaris) */
+#app > section:nth-of-type(1) {
+    order: 2; /* Tugas */
+}
+
+#app > div {
+    order: 3; /* Kutipan */
+}
+
+#app > section:nth-of-type(2) {
+    order: 4; /* Catatan */
+}
+
+#app > section:nth-of-type(3) {
+    order: 5; /* Cuaca */
+}
+
+/* ===== SECTION (Tugas, Catatan, Cuaca) ===== */
+#app > section,
+#app > div {
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 16px;
+}
+
+#app > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+section h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: #555;
+}
+
+/* ===== SUSUN ULANG ISI SECTION TUGAS =====
+   Urutan asli (DOM): judul, input tugas, tombol tambah, filter, cari, daftar
+   Urutan baru: judul, cari tugas, input tugas, tombol tambah, filter, daftar
+*/
+#app > section:nth-of-type(1) {
+    display: flex;
+    flex-direction: column;
+}
+
+#app > section:nth-of-type(1) > h3 {
+    order: 1;
+}
+
+#app > section:nth-of-type(1) > input:nth-of-type(1) {
+    order: 3; /* input tambah tugas */
+}
+
+#app > section:nth-of-type(1) > button {
+    order: 4; /* tombol tambah tugas */
+}
+
+#app > section:nth-of-type(1) > div {
+    order: 5; /* filter Semua/Selesai/Belum */
+}
+
+#app > section:nth-of-type(1) > input:nth-of-type(2) {
+    order: 2; /* kotak cari tugas, dipindah ke atas daftar */
+}
+
+#app > section:nth-of-type(1) > article {
+    order: 6; /* daftar tugas */
+    max-height: 130px;
+    overflow-y: auto;
+}
+
+/* ===== INPUT & TEXTAREA ===== */
+input,
+textarea {
+    width: 100%;
+    padding: 6px 8px;
+    margin-bottom: 8px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+button {
+    background: #fff;
+    color: #333;
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #f0f0f0;
+}
+
+#app > section:nth-of-type(1) > button:first-of-type,
+#app > section:nth-of-type(2) > button {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+#app > section:nth-of-type(1) > button:first-of-type:hover,
+#app > section:nth-of-type(2) > button:hover {
+    background: #1d4ed8;
+}
+
+
+li button,
+.kartu-catatan button {
+    color: #dc2626;
+    border-color: #000;
+    background: #fff;
+    padding: 3px 8px;
+    font-size: 12px;
+    margin-left: 8px;
+}
+
+li button:hover,
+.kartu-catatan button:hover {
+    background: #fdf0f0;
+}
+
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #000;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+li span {
+    flex: 1;
+    cursor: pointer;
+}
+
+li span[style*="line-through"] {
+    color: #999;
+}
+
+
+.wadah-kartu {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.kartu-catatan {
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 8px 10px;
+}
+
+.kartu-catatan p {
+    margin: 0 0 4px 0;
+    word-break: break-word;
+}
+
+.kartu-catatan small {
+    color: #999;
+    display: block;
+    margin-bottom: 4px;
+}
+
+
+#app > div::before {
+    content: "Kutipan";
+    display: block;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #555;
+}
+
+#app > div p:first-child {
+    font-style: italic;
+    margin: 0 0 6px 0;
+}
+
+#app > div p:last-child {
+    text-align: right;
+    margin: 0;
+    color: #777;
+}
+
+
+body.dark-mode {
+    background: #1a1a1a;
+    color: #ddd;
+}
+
+body.dark-mode #app > section,
+body.dark-mode #app > div {
+    border-color: #333;
+}
+
+body.dark-mode li {
+    border-bottom-color: #333;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode button {
+    background: #262626;
+    border-color: #333;
+    color: #ddd;
+}
+
+body.dark-mode .kartu-catatan {
+    border-color: #333;
+}
+
+@media (max-width: 700px) {
+    #app {
+        grid-template-columns: 1fr;
+    }
+}
